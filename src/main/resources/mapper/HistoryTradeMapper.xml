@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoding.demo.mapper.HistoryTradeMapper">
+    <insert id="addHoldShares">
+        insert into history_trade_table (trade_id,stock_id,user_id,trade_time,trade_price,number,canUserNumber,station) values (#{entrustId},#{stockId},#{userId},#{restingOrderTime},#{price},#{number},#{canUserNumber},#{station});
+    </insert>
+    <delete id="delHoldShares">
+        delete from history_trade_table where  trade_id = #{entrustId};
+    </delete>
+    <select id="queryHoldShares" resultType="java.util.LinkedHashMap">
+        select trade_id,stock_id,trade_price,trade_time,number,canUserNumber from history_trade_table where user_id = #{userId};
+    </select>
+</mapper>

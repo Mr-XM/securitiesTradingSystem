@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoding.demo.mapper.OptionalStockMapper">
+    <insert id="addOptionalStock">
+        insert into OptionalStock_table (stock_id,user_id,stock_name) values (#{stock_id},#{user_id},#{stock_name});
+    </insert>
+    <delete id="delOptionalStock">
+        delete from OptionalStock_table where user_id = #{user_id} and stock_id=#{stock_id};
+    </delete>
+    <select id="selectOptionalStock" resultType="java.util.LinkedHashMap">
+        select * from OptionalStock_table where user_id = #{user_id};
+    </select>
+</mapper>

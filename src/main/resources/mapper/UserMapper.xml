@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoding.demo.mapper.UserMapper">
+    <insert id="createUser">
+        insert into user_table (password,phone_number) values (#{password},#{phoneNumber});
+    </insert>
+    <insert id="openUser">
+        update  user_table set user_name=#{userName},user_sex=#{userSex},account_type=#{accountType},account_num=#{accountNum},user_id=#{userId},account_password=#{account_password},account_balance=#{account_balance} where phone_number=#{phone};
+    </insert>
+    <select id="login" resultType="int">
+        select count(*) from user_table where phone_number=#{phone} and password=#{password};
+    </select>
+    <select id="isExistOfPhoneNum" resultType="int">
+    select count(*) from user_table where phone_number = #{phone}
+  </select>
+    <select id="isOpenUser" resultType="String">
+        select user_id from user_table where phone_number = #{phone};
+    </select>
+    <select id="getAccountBalance" resultType="Map">
+        select * from user_table where phone_number = #{phone};
+    </select>
+    <update id="updateAccountBalance">
+        update user_table set account_balance = #{account_balance} where phone_number = #{phone};
+    </update>
+</mapper>

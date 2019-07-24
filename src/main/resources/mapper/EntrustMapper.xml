@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoding.demo.mapper.EntrustMapper">
+    <insert id="restingOrder">
+        insert into entrust_table (entrust_id,stock_id,user_id,resting_order_time,price,number,type,station) values (#{entrustId},#{stockId},#{userId},#{restingOrderTime},#{price},#{number},#{type},#{station});
+    </insert>
+
+    <update id="cancellation">
+        update entrust_table set cancellation_time = #{cancellationTime} where entrust_id = #{entrustId};
+    </update>
+
+    <select id="queryResting" resultType="java.util.LinkedHashMap">
+        select entrust_id,stock_id,user_id,resting_order_time,price,number,type,station from entrust_table where user_id = #{user_id} and resting_order_time like #{time} and cancellation_time is null;
+    </select>
+
+    <select id="queryEntrust" resultType="java.util.LinkedHashMap">
+        select entrust_id,stock_id,user_id,resting_order_time,price,number,type,station from entrust_table where user_id = #{user_id} and resting_order_time like #{time};
+    </select>
+    <!--<select id="queryResting" resultType="java.util.LinkedList">
+        select stock_info.stock_name,entrust_table.entrust_id,entrust_table.stock_id,entrust_table.user_id,entrust_table.resting_order_time,entrust_table.price,entrust_table.number,entrust_table.type from stock_info where stock_info.stock_id in (select entrust_table.stock_id from entrust_table where entrust_table.user_id = #{user_id});
+    </select>-->
+    <select id="queryPurchase" resultType="java.util.LinkedHashMap">
+        select entrust_id,stock_id,user_id,resting_order_time,price,number,type,station from entrust_table where user_id = #{user_id} and entrust_time is not null and resting_order_time like #{time};
+    </select>
+    <update id="updateStation">
+        update entrust_table set station = #{station} where entrust_id = #{entrust_id};
+    </update>
+
+</mapper>

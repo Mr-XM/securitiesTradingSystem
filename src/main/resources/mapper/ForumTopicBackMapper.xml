@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoding.demo.mapper.ForumTopicBackMapper">
+    <insert id="addReply">
+        insert into forum_topic_back (post_id,user_name,reply_time,reply_Text,stock_id,reply_id) values (#{post_id},#{user_name},#{reply_time},#{reply_Text},#{stock_id},#{reply_id});
+    </insert>
+    <delete id="delReply">
+        delete from forum_topic_back where reply_id = #{reply_id};
+    </delete>
+    <select id="selectReply" resultType="java.util.LinkedHashMap">
+        select * from forum_topic_back where post_id = #{post_id};
+    </select>
+</mapper>

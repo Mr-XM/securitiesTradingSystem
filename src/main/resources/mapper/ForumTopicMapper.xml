@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoding.demo.mapper.ForumTopicMapper">
+    <select id="getForumInfo" resultType="Map">
+        select * from forum_topic where stock_id = #{stockId} limit 0,30;
+    </select>
+    <insert id="addForum">
+        insert into forum_topic (post_title,post_text,post_time,user_name,post_id,stock_id,post_read,stock_comment) values (#{post_title},#{post_text},#{post_time},#{user_name},#{post_id},#{stock_id},#{post_read},#{stock_comment});
+    </insert>
+    <delete id="delForum">
+        delete from forum_topic where post_id = #{post_id};
+    </delete>
+    <select id="getHotForumInfo" resultType="Map">
+        select * from forum_topic where stock_id = #{stockId} order by post_read desc limit 0,30;
+    </select>
+    <select id="getOwnForumInfo" resultType="Map">
+        select * from forum_topic where user_name = #{phone};
+    </select>
+    <select id="getForumByPostId" resultType="Map">
+        select * from forum_topic where post_id = #{post_id};
+    </select>
+    <update id="updateCommentNumber">
+        update forum_topic set stock_comment = #{stock_comment} where post_id = #{post_id};
+    </update>
+    <select id="selectCommentNumber" resultType="String">
+        select stock_comment from forum_topic where post_id = #{post_id};
+    </select>
+    <select id="getForumReadNumber" resultType="String">
+        select post_read from forum_topic where post_id = #{post_id};
+    </select>
+    <update id="changeForumReadNumber">
+        update forum_topic set post_read = #{post_read} where post_id = #{post_id};
+    </update>
+</mapper>
